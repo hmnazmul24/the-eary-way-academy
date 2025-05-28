@@ -114,8 +114,9 @@ export async function createCertificate(info: CertificateInfoType) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
   // Trigger a download
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = `certificate_${info.fullName}.pdf`;
-  link.click();
+  //todo
+  // const link = document.createElement("a");
+  // link.href = URL.createObjectURL(blob);
+  // link.download = `certificate_${info.fullName}.pdf`;
+  // link.click();
 }
