@@ -1,20 +1,18 @@
 "use client";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 
-import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
-import { FaAngleRight } from "react-icons/fa6";
+import { getUserAction } from "@/actions/auth";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import AdminNav from "./AdminNav";
-import { AdminLinks } from "../data";
+import { FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useQuery } from "@tanstack/react-query";
-import { getUserAction } from "@/actions/auth";
+import { AdminLinks } from "../data";
 import AdminLoading from "./AdminLoading";
+import AdminNav from "./AdminNav";
 
 const AdminDashboardWrapper = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(false);
   const [role, setRole] = useState<"USER" | "ADMIN">("USER");
   const router = useRouter();
   const pathname = usePathname();

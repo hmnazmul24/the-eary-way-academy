@@ -13,15 +13,10 @@ const BranchTable = dynamic(
   }
 );
 
-let BranchesInfo = async () => {
-  let info = await getAllBranches();
-  return info;
-};
-
 const BranchesPage = () => {
   const { isPending, data } = useQuery({
     queryKey: ["branches"],
-    queryFn: BranchesInfo,
+    queryFn: async () => await getAllBranches(),
   });
 
   if (isPending) {
@@ -50,11 +45,13 @@ const BranchesPage = () => {
     return info;
   };
 
+  const tableDataInfo = tableDataFn();
+
   return (
     <Fragment>
       {data && (
         <div>
-          <BranchTable data={tableDataFn()} />
+          <BranchTable data={tableDataInfo} />
         </div>
       )}
     </Fragment>

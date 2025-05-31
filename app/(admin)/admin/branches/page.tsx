@@ -13,15 +13,10 @@ const BranchTable = dynamic(
   }
 );
 
-let BranchesInfo = async () => {
-  let info = await getAllBranches();
-  return info;
-};
-
 const BranchesPage = () => {
   const { isPending, data } = useQuery({
     queryKey: ["branches"],
-    queryFn: BranchesInfo,
+    queryFn: async () => await getAllBranches(),
   });
 
   if (isPending) {

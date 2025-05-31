@@ -25,7 +25,7 @@ const EditStudentData = () => {
   let { id: studentId } = useParams<{ id: string }>();
 
   //query
-  let {} = useQuery({
+  useQuery({
     queryKey: ["singleStudent"],
     queryFn: async () => {
       let info = await GetSingleStudentById(studentId!);

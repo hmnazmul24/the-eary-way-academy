@@ -16,10 +16,6 @@ import { getAllCourseFees, UpdateCourseFees } from "@/actions/courseFees";
 import { customToast } from "@/components/shared/ToastContainer";
 import { CourseFeesType } from "@/types";
 
-let existData = async () => {
-  let data = await getAllCourseFees();
-  return data;
-};
 const CourseFeesPage = () => {
   const [fees, setFees] = useState<CourseFeesType>({
     name: "",
@@ -33,7 +29,7 @@ const CourseFeesPage = () => {
   const queryClient = useQueryClient();
   const { data, isPending } = useQuery({
     queryKey: ["fees"],
-    queryFn: existData,
+    queryFn: async () => await getAllCourseFees(),
   });
   const { mutate, isPending: updatePending } = useMutation({
     mutationFn: UpdateCourseFees,

@@ -2,15 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BranchType } from "@/Schema/branchSchema";
 import { BranchesTableType } from "@/types";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 
-import { RxOpenInNewWindow } from "react-icons/rx";
-import { FaEdit, FaIdBadge } from "react-icons/fa";
 import Link from "next/link";
+import { RxOpenInNewWindow } from "react-icons/rx";
 
 const columns: TableColumn<BranchesTableType>[] = [
   {
