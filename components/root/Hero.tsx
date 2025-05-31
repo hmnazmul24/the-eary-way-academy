@@ -1,20 +1,19 @@
 "use client";
 
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
+import { allBannersAction } from "@/actions/banner";
+import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/autoplay";
-import Image from "next/image";
-import AnimatedBtn from "./AnimatedBtn";
-import { TypewriterEffect } from "../framerUi/TypeWritter";
-import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
-import { allBannersAction } from "@/actions/banner";
 import RootLoading from "../shared/RootLoading";
+import AnimatedBtn from "./AnimatedBtn";
 
 const Hero = () => {
   const [isLargeScreen, setIsLargeScreen] = useState<boolean>(false);
@@ -33,33 +32,6 @@ const Hero = () => {
     },
   });
 
-  const slider_imageData = ["/11.jpg", "/16.jpg", "/13.jpg"];
-
-  const words = [
-    {
-      text: "The",
-    },
-    {
-      text: "Earn",
-    },
-    {
-      text: "Way",
-    },
-  ];
-  const words2 = [
-    {
-      text: "Youth",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-    {
-      text: "Development",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-    {
-      text: "Resource.",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-  ];
   useEffect(() => {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 768);

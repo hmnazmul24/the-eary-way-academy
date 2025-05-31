@@ -1,15 +1,14 @@
 "use client";
 
-import ApplyBranch from "@/components/root/ApplyBranch";
 import Contact from "@/components/root/Contact";
 import Hero from "@/components/root/Hero";
 import HowItsWork from "@/components/root/HowItsWork";
 import PopularCourse from "@/components/root/PopularCourse";
 import { motion, useScroll } from "framer-motion";
 
-import Quality from "@/components/root/Quality";
-import React, { Fragment } from "react";
 import AnimatedCar from "@/components/root/AnimatedCar";
+import Quality from "@/components/root/Quality";
+import { Fragment } from "react";
 
 const HomePage = () => {
   const { scrollYProgress } = useScroll();
