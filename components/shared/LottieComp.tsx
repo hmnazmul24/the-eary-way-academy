@@ -1,3 +1,5 @@
+"use client";
+
 import Lottie from "react-lottie";
 
 const LottieComp = ({

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "../ui/button";
 import Lottie from "react-lottie";
 import animationData from "../../public/lottie/boom.json";

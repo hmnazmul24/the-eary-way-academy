@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import LottieComp from "./LottieComp";
+"use client";
+
 import loadingLottie from "@/public/lottie/loading.json";
+import Image from "next/image";
+import LottieComp from "./LottieComp";
 
 const RootLoading = ({ isPending }: { isPending: boolean }) => {
   return (

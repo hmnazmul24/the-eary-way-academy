@@ -1,13 +1,10 @@
 "use client";
 
-import { AcceptPayment } from "@/actions/amerpay";
 import LottieComp from "@/components/shared/LottieComp";
-import { customToast } from "@/components/shared/ToastContainer";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense } from "react";
 import succeessAnime from "@/public/lottie/success.json";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const PaymentSuccessPage = () => {
   return (
@@ -18,7 +15,6 @@ const PaymentSuccessPage = () => {
 };
 
 const PaymentSuccessContent = () => {
-  const router = useRouter();
   const params = useSearchParams();
   const status = params.get("status") as "success" | "fail";
 
