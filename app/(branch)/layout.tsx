@@ -1,6 +1,10 @@
-import DashboardWrapper from "@/components/shared/DashboardWrapper";
-import { ReactNode, Suspense } from "react";
+"use client";
 
+import dynamic from "next/dynamic";
+import { ReactNode, Suspense } from "react";
+const DashboardWrapper = dynamic(
+  () => import("@/components/shared/DashboardWrapper")
+);
 const BranchLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
