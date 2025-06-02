@@ -15,7 +15,7 @@ import { cookies } from "next/headers";
 
 export const createEmployee = async (formData: FormData) => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }
@@ -96,7 +96,7 @@ export const employeeDelete = async ({
 };
 export const allEmployees = async () => {
   try {
-    let token = cookies().get("branch_token")?.value!;
+    let token = (await cookies()).get("branch_token")?.value!;
     let { id } = jwtDecode(token);
     let employeesWithDecryptedPassword = await prisma.employee.findMany({
       where: { branchId: id },
@@ -138,7 +138,7 @@ export const employeeAccessSwitch = async (employeeId: string) => {
 
 export const getEmployeesWithSalaryInfo = async () => {
   try {
-    let token = cookies().get("branch_token")?.value!;
+    let token = (await cookies()).get("branch_token")?.value!;
     let { id } = jwtDecode(token);
     const employees = await prisma.employee.findMany({
       where: { branchId: id },
@@ -160,7 +160,7 @@ export const getEmployeesWithSalaryInfo = async () => {
 
 export const getSingleEmployeeWithSalaryInfo = async () => {
   try {
-    let token = cookies().get("branch_token")?.value!;
+    let token = (await cookies()).get("branch_token")?.value!;
     let { id, employeeId } = jwtDecode(token);
     const employee = await prisma.employee.findUnique({
       where: { id: employeeId },

@@ -60,7 +60,7 @@ export const admin_PublishResult = async (data: EditResultType[]) => {
 };
 export const getCertificateInfo = async (studentId: string) => {
   try {
-    let { id } = jwtDecode(cookies().get("branch_token")?.value!);
+    let { id } = jwtDecode((await cookies()).get("branch_token")?.value!);
     let branch = await prisma.branch.findUnique({
       where: { id },
       select: {

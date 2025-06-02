@@ -16,7 +16,7 @@ export const addPaymentOfStudent = async ({
     let employeeName: string | undefined;
     let employeePosition: string | undefined;
 
-    let token = cookies().get("branch_token")?.value!;
+    let token = (await cookies()).get("branch_token")?.value!;
     let { id, employeeId } = jwtDecode(token);
 
     if (employeeId) {
@@ -71,7 +71,7 @@ export const deletPaymentHistory = async ({
 };
 export const getPaymentHistoriesOfBranchStudent = async () => {
   try {
-    let token = cookies().get("branch_token")?.value!;
+    let token = (await cookies()).get("branch_token")?.value!;
     let { id } = jwtDecode(token);
     const history = await prisma.paymentHistory.findMany({
       where: { branchId: id },

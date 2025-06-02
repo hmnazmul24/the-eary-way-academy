@@ -61,8 +61,8 @@ const BranchNav = ({ role }: { role: "USER" | "ADMIN" }) => {
             </Link>
             <DropdownMenuItem
               className="text-red-500 cursor-pointer"
-              onClick={() => {
-                branchLogoutAction();
+              onClick={async () => {
+                await branchLogoutAction();
                 router.push("/");
               }}
             >

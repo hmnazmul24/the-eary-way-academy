@@ -50,7 +50,7 @@ export const branchLoginAction = async ({
         return { error: "invalid credentials" };
       }
       let token = genToken(branch?.id!);
-      setCookie(token);
+      await setCookie(token);
       return { message: "login successfully" };
     } else {
       // for employee
@@ -70,7 +70,7 @@ export const branchLoginAction = async ({
         return { error: "invalid credentials" };
       }
       let token = genToken(employee.branchId, employee.position, employee.id);
-      setCookie(token);
+      await setCookie(token);
       return { message: "login successfully" };
     }
   } catch (error) {
@@ -102,7 +102,7 @@ export const getBranchRoleById = async (id: string) => {
 
 export const getUserAction = async () => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }
@@ -162,8 +162,9 @@ export const getUserAction = async () => {
 };
 
 //
-export const isAuthenticated = () => {
-  let token = cookies().get("branch_token")?.value;
+export const isAuthenticated = async () => {
+  const cookieStore = await cookies();
+  let token = cookieStore.get("branch_token")?.value;
   if (token) {
     return true;
   } else {
@@ -172,7 +173,7 @@ export const isAuthenticated = () => {
 };
 // get branch role
 export const getBranchRole = async () => {
-  let token = cookies().get("branch_token")?.value;
+  let token = (await cookies()).get("branch_token")?.value;
   if (!token) return null;
   let id = jwtDecode(token).id;
   const role = await prisma.branch.findUnique({
@@ -184,8 +185,9 @@ export const getBranchRole = async () => {
 };
 
 //
-export const branchLogoutAction = () => {
-  cookies().delete("branch_token");
+export const branchLogoutAction = async () => {
+  const cookieStore = await cookies();
+  cookieStore.delete("branch_token");
 };
 
 // forgot password action

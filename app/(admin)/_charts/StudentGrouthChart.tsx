@@ -25,14 +25,16 @@ type AllDataType = {
   total: number;
   paid: number;
   unpaid: number;
-  data: DataType[];
+  data?: DataType[];
 };
 type DataType = {
   count: number;
   week: string;
 };
 const StudentGrouthChart = ({ data, paid, total, unpaid }: AllDataType) => {
-  return (
+  console.log(data, paid, total, unpaid);
+
+  return data?.length ? (
     <div>
       <Card className="lg:max-w-md" x-chunk="charts-01-chunk-0">
         <CardHeader className="space-y-0 pb-2">
@@ -51,62 +53,66 @@ const StudentGrouthChart = ({ data, paid, total, unpaid }: AllDataType) => {
               },
             }}
           >
-            <BarChart
-              accessibilityLayer
-              margin={{
-                left: -4,
-                right: -4,
-              }}
-              data={data}
-            >
-              <Bar
-                dataKey="count"
-                fill="var(--color-steps)"
-                radius={5}
-                fillOpacity={0.6}
-                activeBar={<Rectangle fillOpacity={0.8} />}
-              />
-              <XAxis
-                dataKey="week"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={4}
-                tickFormatter={(value) => {
-                  return value;
+            {false ? (
+              <BarChart
+                accessibilityLayer
+                margin={{
+                  left: -4,
+                  right: -4,
                 }}
-              />
-              <ChartTooltip
-                defaultIndex={2}
-                content={
-                  <ChartTooltipContent
-                    hideIndicator
-                    labelFormatter={(value) => "info"}
-                  />
-                }
-                cursor={false}
-              />
-              <ReferenceLine
-                y={1200}
-                stroke="hsl(var(--muted-foreground))"
-                strokeDasharray="3 3"
-                strokeWidth={1}
+                data={data}
               >
-                <Label
-                  position="insideBottomLeft"
-                  value="Average Steps"
-                  offset={10}
-                  fill="hsl(var(--foreground))"
+                <Bar
+                  dataKey="count"
+                  fill="var(--color-steps)"
+                  radius={5}
+                  fillOpacity={0.6}
+                  activeBar={<Rectangle fillOpacity={0.8} />}
                 />
-                <Label
-                  position="insideTopLeft"
-                  value="12,343"
-                  className="text-lg"
-                  fill="hsl(var(--foreground))"
-                  offset={10}
-                  startOffset={100}
+                <XAxis
+                  dataKey="week"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={4}
+                  tickFormatter={(value) => {
+                    return value;
+                  }}
                 />
-              </ReferenceLine>
-            </BarChart>
+                <ChartTooltip
+                  defaultIndex={2}
+                  content={
+                    <ChartTooltipContent
+                      hideIndicator
+                      labelFormatter={(value) => "info"}
+                    />
+                  }
+                  cursor={false}
+                />
+                <ReferenceLine
+                  y={1200}
+                  stroke="hsl(var(--muted-foreground))"
+                  strokeDasharray="3 3"
+                  strokeWidth={1}
+                >
+                  <Label
+                    position="insideBottomLeft"
+                    value="Average Steps"
+                    offset={10}
+                    fill="hsl(var(--foreground))"
+                  />
+                  <Label
+                    position="insideTopLeft"
+                    value="12,343"
+                    className="text-lg"
+                    fill="hsl(var(--foreground))"
+                    offset={10}
+                    startOffset={100}
+                  />
+                </ReferenceLine>
+              </BarChart>
+            ) : (
+              <BarChart></BarChart>
+            )}
           </ChartContainer>
         </CardContent>
         <CardFooter className="flex-col items-start gap-1">
@@ -123,7 +129,7 @@ const StudentGrouthChart = ({ data, paid, total, unpaid }: AllDataType) => {
         </CardFooter>
       </Card>
     </div>
-  );
+  ) : null;
 };
 
 export default StudentGrouthChart;

@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 
 export const GetBranchWithoutIdAction = async () => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }
@@ -35,7 +35,7 @@ export const GetBranchWithoutIdAction = async () => {
 };
 export const ChangeBranchPasswordForOwner = async (password: string) => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }
@@ -58,7 +58,7 @@ export const ChangeBranchPasswordForOwner = async (password: string) => {
 };
 export const getAllStudentsOfBranch = async () => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }
@@ -103,7 +103,7 @@ export const getAllStudentsOfBranch = async () => {
 
 export const getDashboardInfoForBranch = async () => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }

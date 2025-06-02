@@ -31,7 +31,7 @@ export const createStudentAction = async (formData: FormData) => {
       }
     }
 
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { error: "token does'nt exist" };
     }

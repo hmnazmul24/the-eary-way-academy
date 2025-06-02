@@ -7,14 +7,15 @@ import StudentsActions from "@/components/admin/branches/branchStudent/StudentsA
 import { Button } from "@/components/ui/button";
 
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 
 let getSingleBranchInfo = async (id: string) => {
   let data = await GetSingleBranchAction(id);
   return data;
 };
 
-const DetailBranchInfo = ({ params }: { params: { id: string } }) => {
+const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
+  const params = use(props.params);
   const [showAction, setShowAction] = useState<"info" | "action" | "student">(
     "info"
   );

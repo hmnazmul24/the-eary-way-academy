@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 
 export const getAllPaymentHistory = async () => {
   try {
-    let token = cookies().get("branch_token")?.value;
+    let token = (await cookies()).get("branch_token")?.value;
     if (!token) {
       return { message: "token does'nt exist" };
     }

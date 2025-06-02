@@ -50,8 +50,8 @@ const AdminNav = ({ role }: { role?: "USER" | "ADMIN" }) => {
 
             <DropdownMenuItem
               className="text-red-500 cursor-pointer"
-              onClick={() => {
-                branchLogoutAction();
+              onClick={async () => {
+                await branchLogoutAction();
                 router.push("/");
               }}
             >

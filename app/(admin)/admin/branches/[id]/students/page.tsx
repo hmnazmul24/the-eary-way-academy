@@ -6,14 +6,15 @@ import { Input } from "@/components/ui/input";
 import { EditResultType } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, use } from "react";
 import { MdRadioButtonChecked } from "react-icons/md";
 import { PiShareNetworkFill } from "react-icons/pi";
 import CertificateModel from "@/app/(admin)/_certificate/CertificateModel";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 
-const FilteredStudentsPage = ({ params }: { params: { id: string } }) => {
+const FilteredStudentsPage = (props: { params: Promise<{ id: string }> }) => {
+  const params = use(props.params);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <FilteredStudents id={params.id} />

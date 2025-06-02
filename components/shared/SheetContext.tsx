@@ -15,7 +15,7 @@ import Link from "next/link";
 import SocialIcons from "./SocialIcons";
 
 const SheetContext = ({ children }: { children: ReactNode }) => {
-  const sheetRef: RefObject<HTMLButtonElement> = useRef(null);
+  const sheetRef: RefObject<HTMLButtonElement | null> = useRef(null);
   const navData = [
     { text: "Apply Branch", link: "/branch-apply" },
     { text: "Student Result", link: "/student-result" },

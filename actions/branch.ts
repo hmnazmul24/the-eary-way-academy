@@ -188,7 +188,7 @@ export const disabledAction = async (id: string) => {
     if (!branch) {
       return { error: "branch not found" };
     }
-    let decode = jwtDecode(cookies().get("branch_token")?.value!);
+    let decode = jwtDecode((await cookies()).get("branch_token")?.value!);
     if (branch.id === decode.id) {
       return { error: "you can't block himself" };
     }

@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import TypingTestResultBox from "./_components/TypingTestResultBox";
 import DesignResultBox from "./_components/DesignResultBox";
 import { useQuery } from "@tanstack/react-query";
@@ -18,11 +18,12 @@ const skills: SkillsType[] = [
   },
 ];
 
-const SkillCertificateProviding = ({
-  params,
-}: {
-  params: { studentid: string };
-}) => {
+const SkillCertificateProviding = (
+  props: {
+    params: Promise<{ studentid: string }>;
+  }
+) => {
+  const params = use(props.params);
   const { isPending, data, error } = useQuery({
     queryFn: async () => {
       let data = await getAdditionalCertificates({

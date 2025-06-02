@@ -14,7 +14,7 @@ import { OtpPage } from "./OtpPage";
 import { ResetPassword } from "./ResetPassword";
 
 const LoginDialog = ({ children }: { children: ReactNode }) => {
-  const dialogRef: RefObject<HTMLButtonElement> = useRef(null);
+  const dialogRef: RefObject<HTMLButtonElement | null> = useRef(null);
   const [selectedPage, setSelelectedPage] = useState<
     "login" | "forgot" | "otp" | "reset"
   >("login");

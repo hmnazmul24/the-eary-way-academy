@@ -16,6 +16,9 @@ const AdmimPage = () => {
   if (isPending) {
     return <div>Loading...</div>;
   }
+  if (!data) {
+    return null;
+  }
 
   let {
     branchCount,
@@ -26,7 +29,7 @@ const AdmimPage = () => {
     studentProgressArr,
     unpaidStudentCount,
     revenue,
-  } = data!;
+  } = data;
 
   let formateStudentData = studentProgressArr
     ?.slice()
@@ -34,8 +37,7 @@ const AdmimPage = () => {
     .map((item, i) => ({
       count: item.count,
       week: `${i} week`,
-    }))!;
-
+    }));
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <BranchGrouthChart

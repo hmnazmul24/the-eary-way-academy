@@ -22,7 +22,7 @@ const DocumentsForm: React.FC = () => {
     }
   };
 
-  const handleSelected = (ref: React.RefObject<HTMLInputElement>) => {
+  const handleSelected = (ref: React.RefObject<HTMLInputElement | null>) => {
     ref.current?.click();
   };
 

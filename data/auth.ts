@@ -4,8 +4,9 @@ import jwt from "jsonwebtoken";
 import { prisma } from "@/lib/db";
 import crypto from "crypto-js";
 
-export const setCookie = (token: string) => {
-  cookies().set({
+export const setCookie = async (token: string) => {
+  const cookieStore = await cookies();
+  cookieStore.set({
     name: "branch_token",
     value: token,
     httpOnly: true,
