@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PaymentHistoryType } from "@/types/payment";
-import { BranchStudentType } from "@/types/students";
 import React, { useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 
