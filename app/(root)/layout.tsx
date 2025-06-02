@@ -1,5 +1,12 @@
-import RootFooter from "@/components/shared/RootFooter";
-import RootNavbar from "@/components/shared/RootNavbar";
+"use client";
+
+const RootFooter = dynamic(() => import("@/components/shared/RootFooter"), {
+  ssr: false,
+});
+const RootNavbar = dynamic(() => import("@/components/shared/RootNavbar"), {
+  ssr: false,
+});
+import dynamic from "next/dynamic";
 import React, { ReactNode, Suspense } from "react";
 
 const RootLayout = ({ children }: { children: ReactNode }) => {

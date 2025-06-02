@@ -1,7 +1,9 @@
 "use client";
 
 import { AcceptPayment } from "@/actions/amerpay";
-const LottieComp = dynamic(() => import("@/components/shared/LottieComp"));
+const LottieComp = dynamic(() => import("@/components/shared/LottieComp"), {
+  ssr: false,
+});
 import { customToast } from "@/components/shared/ToastContainer";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
