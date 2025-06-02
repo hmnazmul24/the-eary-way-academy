@@ -1,3 +1,5 @@
+"use client";
+
 import AdminDashboardWrapper from "@/components/admin/AdminDashboardWrapper";
 import React, { ReactNode, Suspense } from "react";
 
