@@ -1,6 +1,10 @@
-"use client";
+import dynamic from "next/dynamic";
 
-import AdminDashboardWrapper from "@/components/admin/AdminDashboardWrapper";
+const AdminDashboardWrapper = dynamic(
+  () => import("@/components/admin/AdminDashboardWrapper"),
+  { ssr: false }
+);
+
 import React, { ReactNode, Suspense } from "react";
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
