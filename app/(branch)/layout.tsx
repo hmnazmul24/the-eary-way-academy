@@ -3,8 +3,10 @@
 import dynamic from "next/dynamic";
 import { ReactNode, Suspense } from "react";
 const DashboardWrapper = dynamic(
-  () => import("@/components/shared/DashboardWrapper")
+  () => import("@/components/shared/DashboardWrapper"),
+  { ssr: false }
 );
+
 const BranchLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
