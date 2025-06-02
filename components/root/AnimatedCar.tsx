@@ -1,6 +1,9 @@
 import React from "react";
-import LottieComp from "../shared/LottieComp";
+const LottieComp = dynamic(() => import("../shared/LottieComp"), {
+  ssr: false,
+});
 import AnimatedCarLootie from "@/public/lottie/car.json";
+import dynamic from "next/dynamic";
 
 const AnimatedCar = () => {
   return (
