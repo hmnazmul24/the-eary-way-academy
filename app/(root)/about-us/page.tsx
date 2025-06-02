@@ -1,13 +1,22 @@
 "use client";
-import { allTeamInfoAction } from "@/actions/team";
-import Contact from "@/components/root/Contact";
-import LottieComp from "@/components/shared/LottieComp";
-import RootLoading from "@/components/shared/RootLoading";
+
+const Contact = dynamic(() => import("@/components/root/Contact"), {
+  ssr: false,
+});
+const LottieComp = dynamic(() => import("@/components/shared/LottieComp"), {
+  ssr: false,
+});
+const RootLoading = dynamic(() => import("@/components/shared/RootLoading"), {
+  ssr: false,
+});
 import bulb from "@/public/lottie/bulb.json";
+import { allTeamInfoAction } from "@/actions/team";
+
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaLeaf, FaLightbulb, FaUsers } from "react-icons/fa6";
+import dynamic from "next/dynamic";
 
 const AboutUsPage = () => {
   const { data, isPending } = useQuery({
