@@ -1,13 +1,14 @@
 "use client";
 
 import { AcceptPayment } from "@/actions/amerpay";
-import LottieComp from "@/components/shared/LottieComp";
+const LottieComp = dynamic(() => import("@/components/shared/LottieComp"));
 import { customToast } from "@/components/shared/ToastContainer";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
 import succeessAnime from "@/public/lottie/success.json";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 const PaymentSuccessPage = () => {
   return (

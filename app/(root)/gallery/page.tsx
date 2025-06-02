@@ -4,8 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
-import LottieComp from "@/components/shared/LottieComp";
+const LottieComp = dynamic(() => import("@/components/shared/LottieComp"), {
+  ssr: false,
+});
 import loattiAnimation from "@/public/lottie/loading.json";
+import dynamic from "next/dynamic";
 
 const ImageGallery = () => {
   const { data, isPending } = useQuery({

@@ -1,9 +1,13 @@
 "use client";
 
-import LottieComp from "@/components/shared/LottieComp";
+const LottieComp = dynamic(() => import("@/components/shared/LottieComp"), {
+  ssr: false,
+});
+
 import succeessAnime from "@/public/lottie/success.json";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 const PaymentSuccessPage = () => {

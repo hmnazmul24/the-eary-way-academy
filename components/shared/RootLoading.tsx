@@ -1,10 +1,11 @@
 "use client";
 
 import loadingLottie from "@/public/lottie/loading.json";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import LottieComp from "./LottieComp";
+const LottieComp = dynamic(() => import("./LottieComp"), { ssr: false });
 
-const RootLoading = ({ isPending }: { isPending: boolean }) => {
+const RootLoading = ({}: { isPending: boolean }) => {
   return (
     <div className="h-screen flex-col top-0 left-0 fixed z-50 w-full  bg-white flex items-center justify-center">
       <div className="p-4 z-40 relative -translate-x-3 drop-shadow-lg flex items-center justify-center">
