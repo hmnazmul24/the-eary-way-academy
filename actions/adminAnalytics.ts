@@ -57,6 +57,8 @@ export const admin_branch_grouth = async () => {
 
     // revenue show
     let payments = await prisma.payment.findMany({ select: { amount: true } });
+    console.log(payments, "payments");
+
     let revenue = 0;
 
     payments.forEach((item) => {

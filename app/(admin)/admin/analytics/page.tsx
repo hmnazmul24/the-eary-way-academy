@@ -58,15 +58,47 @@
 
 // export default AdmimPage;
 
+"use client";
+import { admin_branch_grouth } from "@/actions/adminAnalytics";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 const AdminAnalyticsPage = () => {
+  const { data, isPending } = useQuery({
+    queryKey: ["admin_growth"],
+    queryFn: async () => await admin_branch_grouth(),
+  });
+
+  if (isPending) {
+    return <div>Loading data ....</div>;
+  }
+
+  console.log(data);
+
   return (
     <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus saepe
-      fugit possimus incidunt, praesentium dignissimos. Mollitia expedita, magni
-      velit ad ipsam corrupti minima aliquid pariatur optio ab quidem, veniam
-      soluta.
+      {data && (
+        <div>
+          <div className="*:p-4 border bg-green-300/20 ">
+            <div>
+              <h1 className="font-bold">Total Student Count</h1>
+              {data.studentCount}
+            </div>
+            <div>
+              <h1>Total Paid Students</h1>
+              {data.paidStudentsCount}
+            </div>
+            <div>
+              <h1>Total Unpaid Students</h1>
+              {data.unpaidStudentCount}
+            </div>
+            <div>
+              <h1>Revenue</h1>
+              {data.revenue}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

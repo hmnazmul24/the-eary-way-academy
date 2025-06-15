@@ -57,10 +57,10 @@ export async function createTypingCertificate({
   // Trigger a download
 
   // todo:
-  // const link = document.createElement("a");
-  // link.href = URL.createObjectURL(blob);
-  // link.download = `typing.pdf`;
-  // link.click();
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `typing.pdf`;
+  link.click();
 }
 
 //.................................office design ...........................
