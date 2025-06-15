@@ -32,8 +32,6 @@ type DataType = {
   week: string;
 };
 const StudentGrouthChart = ({ data, paid, total, unpaid }: AllDataType) => {
-  console.log(data, paid, total, unpaid);
-
   return data?.length ? (
     <div>
       <Card className="lg:max-w-md" x-chunk="charts-01-chunk-0">

@@ -32,8 +32,8 @@ export function TotalEarnings({ amount }: { amount: number }) {
       <CardHeader className="items-center pb-0">
         <CardTitle>Payments from students</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-1 items-center pb-0">
-        <ChartContainer
+      <CardContent className="flex flex-1 items-center pb-0 justify-center text-3xl text-green-500 font-bold font-sans">
+        {/* <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square w-full max-w-[250px]"
         >
@@ -81,7 +81,8 @@ export function TotalEarnings({ amount }: { amount: number }) {
               className="stroke-transparent stroke-2"
             />
           </RadialBarChart>
-        </ChartContainer>
+        </ChartContainer> */}
+        {amount} &#2547;
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">

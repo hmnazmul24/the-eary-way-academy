@@ -73,8 +73,6 @@ const AdminAnalyticsPage = () => {
     return <div>Loading data ....</div>;
   }
 
-  console.log(data);
-
   return (
     <div>
       {data && (

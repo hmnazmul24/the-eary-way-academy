@@ -28,7 +28,6 @@ const UnpaidStudents = () => {
   if (isError) {
     return <div className="text-red-500">error occurs</div>;
   }
-  console.log(data);
 
   return (
     <div>

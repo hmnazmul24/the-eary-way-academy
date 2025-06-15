@@ -147,6 +147,7 @@ export const getDashboardInfoForBranch = async () => {
     const earnings = await prisma.paymentHistory.findMany({
       where: { branchId: id },
     });
+
     let earnedAmount: number = 0;
     earnings.forEach((item) => {
       earnedAmount = earnedAmount + item.amount;
