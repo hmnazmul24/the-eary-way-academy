@@ -3,6 +3,7 @@
 import { GetSingleBranchAction } from "@/actions/branch";
 import AdminBranchAction from "@/components/admin/branches/AdminBranchAction";
 import DetailBranch from "@/components/admin/branches/DetailBranch";
+import Requests from "@/components/admin/branches/branchStudent/Requests";
 import StudentsActions from "@/components/admin/branches/branchStudent/StudentsActions";
 import { Button } from "@/components/ui/button";
 
@@ -16,9 +17,9 @@ let getSingleBranchInfo = async (id: string) => {
 
 const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
   const params = use(props.params);
-  const [showAction, setShowAction] = useState<"info" | "action" | "student">(
-    "info"
-  );
+  const [showAction, setShowAction] = useState<
+    "info" | "action" | "student" | "requests"
+  >("info");
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["branch"],
@@ -35,7 +36,7 @@ const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
     <div>
       <h1 className="text-2xl font-bold my-2 left-2 flex items-center justify-start gap-3">
         <span>Branch Information</span>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 overflow-x-auto">
           <Button
             className={`${
               showAction === "info"
@@ -66,6 +67,16 @@ const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
           >
             Students
           </Button>
+          <Button
+            className={`${
+              showAction === "requests"
+                ? "bg-black"
+                : "bg-transparent shadow-none text-green-500"
+            }`}
+            onClick={() => setShowAction("requests")}
+          >
+            Requests
+          </Button>
         </div>
       </h1>
       {showAction === "action" ? (
@@ -79,6 +90,8 @@ const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
         />
       ) : showAction === "info" ? (
         <DetailBranch branchInfo={data.branch!} />
+      ) : showAction === "requests" ? (
+        <Requests id={params.id} />
       ) : (
         <StudentsActions id={params.id} />
       )}

@@ -45,6 +45,8 @@ export const consizeData = ({
       genReg: item.genReg!,
       genRoll: item.genRoll!,
       isPaid: item.isPaid,
+      idTrnxIdVarified: item.isPaymentTranxIdValid,
+      trnxId: item.paymentTransjunctionId ?? "",
       isAdminStudent,
       fees: PriceSettingHelper({
         duration: item.courseDuration,

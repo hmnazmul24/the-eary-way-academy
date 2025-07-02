@@ -1,6 +1,6 @@
 "use client";
 
-import { processAmerpayPayment } from "@/actions/amerpay";
+// import { processAmerpayPayment } from "@/actions/amerpay";
 import { AdminStudentPayment } from "@/actions/payments";
 import { consizeData } from "@/components/data/priceHelper";
 import { customToast } from "@/components/shared/ToastContainer";
@@ -8,19 +8,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CourseFeesType, Student } from "@/types";
 import { BranchStudentType } from "@/types/students";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import StudentActionLists from "./studentEditOptions/StudentActionLists";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { applyForAcceptWithPaymentTnxId } from "@/actions/new-features/student";
 
-type PaymentType = {
-  id: string;
-  amount: string;
-  phone: string;
-  name: string;
-};
+// type PaymentType = {
+//   id: string;
+//   amount: string;
+//   phone: string;
+//   name: string;
+// };
 
 const UnPaidStudentTable = ({
   info,
@@ -34,23 +41,42 @@ const UnPaidStudentTable = ({
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
+  //for payment
+  const [studentId, setStudentId] = useState<string>("");
+  const [trnxId, setTrnxId] = useState<string>("");
 
   const queryClient = useQueryClient();
+  // todo:
+  // const hanleClickFunc = async (info: PaymentType) => {
+  //   setLoading(info.id);
+  //   try {
+  //     let data = await processAmerpayPayment(info);
+  //     if (data.data?.payment_url) {
+  //       window.open(data.data.payment_url, "_self");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setLoading(null);
+  //   }
+  // };
 
-  const hanleClickFunc = async (info: PaymentType) => {
-    setLoading(info.id);
-    try {
-      let data = await processAmerpayPayment(info);
-      if (data.data?.payment_url) {
-        window.open(data.data.payment_url, "_self");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(null);
-    }
+  // trnx---------------------------------------------------------s
+  const tranxMutation = useMutation({
+    mutationFn: applyForAcceptWithPaymentTnxId,
+    onSuccess: ({ message }) => {
+      customToast("success", message);
+      queryClient.invalidateQueries({ queryKey: ["allStudentsOfBranch"] });
+      setStudentId("");
+      setTrnxId("");
+    },
+  });
+  const handleTrnxId = () => {
+    if (!trnxId || !studentId) return null;
+
+    tranxMutation.mutate({ info: { trnxId, studentId } });
   };
-
+  // trnx---------------------------------------------------------e
   const hanleAdminStudentPayment = async (id: string) => {
     setLoading(id);
     try {
@@ -119,20 +145,33 @@ const UnPaidStudentTable = ({
               </div>
             ) : (
               <div className="">
-                <Button
-                  className="bg-amber-500 font-sans text-sm hover:bg-amber-600"
-                  onClick={async () =>
-                    await hanleClickFunc({
-                      id: row.id,
-                      amount: row.fees as string,
-                      name: row.name,
-                      phone: row.mobile,
-                    })
-                  }
-                  disabled={loading === row.id} // Disable button if request is in progress
-                >
-                  {loading === row.id ? "Processing..." : `Pay ${row.fees} BDT`}
-                </Button>
+                {row.trnxId ? (
+                  <Button
+                    disabled
+                    className="border border-blue-500"
+                    variant={"secondary"}
+                  >
+                    Varifying
+                  </Button>
+                ) : (
+                  <Button
+                    className="bg-amber-500 font-sans text-sm hover:bg-amber-600"
+                    onClick={() =>
+                      // await hanleClickFunc({
+                      //   id: row.id,
+                      //   amount: row.fees as string,
+                      //   name: row.name,
+                      //   phone: row.mobile,
+                      // })
+                      setStudentId(row.id)
+                    }
+                    disabled={loading === row.id} // Disable button if request is in progress
+                  >
+                    {loading === row.id
+                      ? "Processing..."
+                      : `Pay ${row.fees} BDT`}
+                  </Button>
+                )}
               </div>
             )}
           </div>
@@ -166,6 +205,8 @@ const UnPaidStudentTable = ({
   );
 
   //single student info for showing student details
+
+  console.log(filteredItems);
 
   return (
     <div className="tableContainer">
@@ -205,6 +246,44 @@ const UnPaidStudentTable = ({
           responsive
         />
       </div>
+      <Dialog
+        open={studentId ? true : false}
+        onOpenChange={(v) => {
+          if (!v) {
+            setStudentId("");
+            setTrnxId("");
+          }
+        }}
+      >
+        <DialogContent className="font-normal">
+          <DialogHeader>
+            <DialogTitle className="font-normal text-base">
+              Payment via <span className="text-yellow-500">Bkash</span> to{" "}
+              <span className="font-bold text-xl text-blue-500 mr-2">
+                01880110842
+              </span>
+              powered by{" "}
+              <span className="font-bold text-xl">The Earn Way Academy</span>;
+            </DialogTitle>
+            <div className="space-y-3">
+              <div className="text-green-500">If you have already done.</div>
+              <div className="space-y-2">
+                <Input
+                  placeholder="Enter trnx id form bkash payment"
+                  value={trnxId}
+                  onChange={(e) => setTrnxId(e.target.value)}
+                />
+                <Button
+                  disabled={tranxMutation.isPending}
+                  onClick={handleTrnxId}
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

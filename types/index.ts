@@ -91,6 +91,8 @@ export type Student = {
   session: string;
   isPaid: boolean;
   isAdminStudent: boolean;
+  trnxId?: string;
+  idTrnxIdVarified: boolean;
   result: string;
   fees: string | boolean;
   picture: string | undefined;

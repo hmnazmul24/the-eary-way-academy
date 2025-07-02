@@ -108,40 +108,42 @@ model MoreInfo {
 
 // student model 
 model Student {
-  id                 String                   @id @default(uuid())
-  name               String
-  fatherName         String
-  motherName         String
-  mobile             String
-  profileDoc         ProfileImg?
-  isPaid             Boolean                  @default(false)
-  gender             String
-  dateOfBirth        String
-  nationality        String
-  religion           String
-  bloodGroup         String
-  email              String?                  @unique
-  courseDuration     String
-  courseRange        String
-  courseTrade        String
-  mediam             String
-  passedBoard        String
-  passedYear         String
-  passedRoll         String
-  passedResult       String
-  genRoll            String?
-  genReg             String?
-  genResult          String?
-  certificateSLNo    String?
-  passedType         PassedType
-  transId            String?
-  branchId           String
-  payment_fulfilled  Boolean                  @default(false)
-  paymentHistory     PaymentHistory[]
-  speed_certificate  SpeedCertificate?
-  design_certificate OfficeDesignCertificate?
-  branch             Branch                   @relation(fields: [branchId], references: [id])
-  createdAt          DateTime                 @default(now())
+  id                     String                   @id @default(uuid())
+  name                   String
+  fatherName             String
+  motherName             String
+  mobile                 String
+  profileDoc             ProfileImg?
+  isPaid                 Boolean                  @default(false)
+  paymentTransjunctionId String?
+  isPaymentTranxIdValid  Boolean                  @default(false)
+  gender                 String
+  dateOfBirth            String
+  nationality            String
+  religion               String
+  bloodGroup             String
+  email                  String?                  @unique
+  courseDuration         String
+  courseRange            String
+  courseTrade            String
+  mediam                 String
+  passedBoard            String
+  passedYear             String
+  passedRoll             String
+  passedResult           String
+  genRoll                String?
+  genReg                 String?
+  genResult              String?
+  certificateSLNo        String?
+  passedType             PassedType
+  transId                String?
+  branchId               String
+  payment_fulfilled      Boolean                  @default(false)
+  paymentHistory         PaymentHistory[]
+  speed_certificate      SpeedCertificate?
+  design_certificate     OfficeDesignCertificate?
+  branch                 Branch                   @relation(fields: [branchId], references: [id])
+  createdAt              DateTime                 @default(now())
 }
 
 // additional skill certificate l.g. typing, 

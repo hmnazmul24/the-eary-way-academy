@@ -32,6 +32,10 @@ export type BranchStudentType = {
   genResult: string | null;
   email: string | null;
   branchId: string;
+  paymentTransjunctionId: string | null;
+
+  isPaymentTranxIdValid: boolean;
+
   profileDoc: ImageUrlType | null;
   paymentHistory: StudentPaymentHistoryType[];
   createdAt: Date;
