@@ -117,6 +117,7 @@ model Student {
   isPaid                 Boolean                  @default(false)
   paymentTransjunctionId String?
   isPaymentTranxIdValid  Boolean                  @default(false)
+  courseFeesPaidAmount   String?
   gender                 String
   dateOfBirth            String
   nationality            String

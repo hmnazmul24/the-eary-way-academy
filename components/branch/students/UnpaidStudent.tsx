@@ -43,6 +43,7 @@ const UnPaidStudentTable = ({
   const [loading, setLoading] = useState<string | null>(null);
   //for payment
   const [studentId, setStudentId] = useState<string>("");
+  const [studentPaymentAmount, setStudentPaymentAmount] = useState<string>("");
   const [trnxId, setTrnxId] = useState<string>("");
 
   const queryClient = useQueryClient();
@@ -68,13 +69,16 @@ const UnPaidStudentTable = ({
       customToast("success", message);
       queryClient.invalidateQueries({ queryKey: ["allStudentsOfBranch"] });
       setStudentId("");
+      setStudentPaymentAmount("");
       setTrnxId("");
     },
   });
   const handleTrnxId = () => {
-    if (!trnxId || !studentId) return null;
+    if (!trnxId || !studentId || !studentPaymentAmount) return null;
 
-    tranxMutation.mutate({ info: { trnxId, studentId } });
+    tranxMutation.mutate({
+      info: { trnxId, studentId, amount: studentPaymentAmount },
+    });
   };
   // trnx---------------------------------------------------------e
   const hanleAdminStudentPayment = async (id: string) => {
@@ -163,7 +167,10 @@ const UnPaidStudentTable = ({
                       //   name: row.name,
                       //   phone: row.mobile,
                       // })
-                      setStudentId(row.id)
+                      {
+                        setStudentId(row.id);
+                        setStudentPaymentAmount(row.fees.toString());
+                      }
                     }
                     disabled={loading === row.id} // Disable button if request is in progress
                   >
@@ -251,6 +258,7 @@ const UnPaidStudentTable = ({
         onOpenChange={(v) => {
           if (!v) {
             setStudentId("");
+            setStudentPaymentAmount("");
             setTrnxId("");
           }
         }}
@@ -258,12 +266,16 @@ const UnPaidStudentTable = ({
         <DialogContent className="font-normal">
           <DialogHeader>
             <DialogTitle className="font-normal text-base">
-              Payment via <span className="text-yellow-500">Bkash</span> to{" "}
-              <span className="font-bold text-xl text-blue-500 mr-2">
-                01880110842
-              </span>
-              powered by{" "}
-              <span className="font-bold text-xl">The Earn Way Academy</span>;
+              <span className="text-yellow-500"> Payment via Bkash</span>
+              <div>
+                <Image
+                  className="w-52 rounded-md"
+                  src={"/nazmul-payment-qr.jpeg"}
+                  height={300}
+                  width={300}
+                  alt="payment-qr"
+                />
+              </div>
             </DialogTitle>
             <div className="space-y-3">
               <div className="text-green-500">If you have already done.</div>

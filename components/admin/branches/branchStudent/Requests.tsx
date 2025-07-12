@@ -71,7 +71,11 @@ function Requests({ id: branchId }: { id: string }) {
                 disabled={item.id === selected && mutation.isPending}
                 onClick={() => {
                   setSelected(item.id);
-                  mutation.mutate(item.id);
+                  if (!item.courseFeesPaidAmount) return null;
+                  mutation.mutate({
+                    studentId: item.id,
+                    paymentAmount: item.courseFeesPaidAmount,
+                  });
                 }}
               >
                 {item.id === selected && mutation.isPending

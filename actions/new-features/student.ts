@@ -6,6 +6,7 @@ import { prisma } from "@/lib/db";
 type TrnxType = {
   studentId: string;
   trnxId: string;
+  amount: string;
 };
 
 export const applyForAcceptWithPaymentTnxId = async ({
@@ -15,7 +16,10 @@ export const applyForAcceptWithPaymentTnxId = async ({
 }) => {
   await prisma.student.update({
     where: { id: info.studentId },
-    data: { paymentTransjunctionId: info.trnxId },
+    data: {
+      paymentTransjunctionId: info.trnxId,
+      courseFeesPaidAmount: info.amount,
+    },
   });
 
   return { message: "Request successfull, we would varify it soon." };
@@ -30,7 +34,13 @@ export const requestedStudentListOfBranch = async ({ id }: { id: string }) => {
   });
 };
 
-export const adminVarifiedStudent = async (studentId: string) => {
+export const adminVarifiedStudent = async ({
+  studentId,
+  paymentAmount,
+}: {
+  studentId: string;
+  paymentAmount: string;
+}) => {
   let transId = generateUniqueTransId();
 
   let student = await prisma.student.update({
@@ -41,7 +51,7 @@ export const adminVarifiedStudent = async (studentId: string) => {
   if (student) {
     await prisma.payment.create({
       data: {
-        amount: "0",
+        amount: paymentAmount,
         courseDuration: student?.courseDuration,
         courseTrade: student?.courseTrade,
         name: student?.name,

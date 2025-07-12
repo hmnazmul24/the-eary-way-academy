@@ -152,3 +152,11 @@ export const AllowBranchWithoutPaymentAction = async (id: string) => {
     return { error: "internal server error" };
   }
 };
+
+// show student paymetn info
+export async function getBranchStudentPaymentHistory(id: string) {
+  return await prisma.payment.findMany({
+    where: { branchId: id },
+    orderBy: { createdAt: "desc" },
+  });
+}

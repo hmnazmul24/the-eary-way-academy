@@ -3,6 +3,7 @@
 import { GetSingleBranchAction } from "@/actions/branch";
 import AdminBranchAction from "@/components/admin/branches/AdminBranchAction";
 import DetailBranch from "@/components/admin/branches/DetailBranch";
+import PaymentHistory from "@/components/admin/branches/branchStudent/PaymentHistory";
 import Requests from "@/components/admin/branches/branchStudent/Requests";
 import StudentsActions from "@/components/admin/branches/branchStudent/StudentsActions";
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,7 @@ let getSingleBranchInfo = async (id: string) => {
 const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
   const params = use(props.params);
   const [showAction, setShowAction] = useState<
-    "info" | "action" | "student" | "requests"
+    "info" | "action" | "student" | "requests" | "payments"
   >("info");
 
   const { data, isPending, isError } = useQuery({
@@ -77,6 +78,16 @@ const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
           >
             Requests
           </Button>
+          <Button
+            className={`${
+              showAction === "payments"
+                ? "bg-black"
+                : "bg-transparent shadow-none text-green-500"
+            }`}
+            onClick={() => setShowAction("payments")}
+          >
+            Payments
+          </Button>
         </div>
       </h1>
       {showAction === "action" ? (
@@ -92,8 +103,10 @@ const DetailBranchInfo = (props: { params: Promise<{ id: string }> }) => {
         <DetailBranch branchInfo={data.branch!} />
       ) : showAction === "requests" ? (
         <Requests id={params.id} />
-      ) : (
+      ) : showAction === "student" ? (
         <StudentsActions id={params.id} />
+      ) : (
+        <PaymentHistory id={params.id} />
       )}
     </div>
   );
