@@ -44,6 +44,7 @@ const BranchesPage = () => {
           noOfCom: e.branchInfo?.noOfComputers!,
           picture: e.ppSizePhoto?.secure_url!,
           varified: e.isVarified,
+          branchType: e.branchInfo?.branchType!,
         });
       });
     }

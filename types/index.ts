@@ -7,6 +7,7 @@ export type BranchesTableType = {
   noOfCom: string;
   picture: string;
   varified: boolean;
+  branchType: string;
 };
 
 // Combined type for Branch

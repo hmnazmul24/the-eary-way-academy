@@ -79,6 +79,7 @@ model BranchInfo {
   branchEmail   String
   instituteAge  String
   noOfComputers String
+  branchType    String @default("Normal")
   branchId      String @unique
   branch        Branch @relation(fields: [branchId], references: [id])
 }

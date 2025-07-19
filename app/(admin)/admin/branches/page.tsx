@@ -14,13 +14,16 @@ const BranchTable = dynamic(
 );
 
 const BranchesPage = () => {
-  const { isPending, data } = useQuery({
+  const { isPending, error, data } = useQuery({
     queryKey: ["branches"],
     queryFn: async () => await getAllBranches(),
   });
 
   if (isPending) {
     return <div>loading....</div>;
+  }
+  if (error) {
+    return <div>error occurs</div>;
   }
 
   const tableDataFn = (): BranchesTableType[] => {
@@ -36,6 +39,7 @@ const BranchesPage = () => {
           noOfCom: e.branchInfo?.noOfComputers!,
           picture: e.ppSizePhoto?.secure_url!,
           varified: e.isVarified,
+          branchType: e.branchInfo?.branchType!,
         });
       });
     }
