@@ -3,7 +3,6 @@
 import { hashedPassword, jwtDecode } from "@/data/auth";
 import { getLast30Days } from "@/data/lineChartInfo";
 import { prisma } from "@/lib/db";
-import { LineChartArrType } from "@/types";
 import { cookies } from "next/headers";
 
 export const GetBranchWithoutIdAction = async () => {
@@ -76,6 +75,7 @@ export const getAllStudentsOfBranch = async () => {
     let allStudents = await prisma.student.findMany({
       where: { branchId: id },
       include: { profileDoc: true, paymentHistory: true },
+      orderBy: { createdAt: "desc" },
     });
     let feesData = await prisma.courseFees.findMany({
       select: {
