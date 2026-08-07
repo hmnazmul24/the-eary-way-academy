@@ -90,9 +90,9 @@ const StudentsActions = ({ id }: { id: string }) => {
                   (info) => info.courseDuration === item.course_duration
                 ).length;
                 if (length !== undefined && length > 0) {
-                  router.push(
-                    `/admin/branches/${id}/students?trade=${selectedCourse}&duration=${item.course_duration}`
-                  );
+                router.push(
+  `/admin/branches/${id}/students?trade=${encodeURIComponent(selectedCourse)}&duration=${encodeURIComponent(item.course_duration)}`
+);
                 }
               }}
             >
