@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import ReactQuery from "@/components/data/ReactQuery";
 import { Suspense } from "react";
 
+
 const incons = Inconsolata({ subsets: ["latin"], variable: "--font-incons" });
 const salsa = Salsa({
   subsets: ["latin"],

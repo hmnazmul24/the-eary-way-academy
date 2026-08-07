@@ -5,7 +5,7 @@ const SECURE_BRANCH_URLS = [
   "/branch/employee-management",
   "/branch/salary-management",
 ];
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const token = req.cookies.get("branch_token")?.value;
   if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
