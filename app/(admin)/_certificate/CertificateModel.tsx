@@ -59,7 +59,7 @@ const RegistrationCardModal = ({
           {children}
         </DialogTrigger>
         <DialogTitle></DialogTitle>
-        <DialogContent className="h-[50vh] md:max-w-[50] border-black ">
+        <DialogContent className="h-[50vh]  border-black ">
           <div className="max-h-[80vh] w-full scrollbar_hidden overflow-y-scroll flex items-center justify-center">
             {isPending ? (
               <div className=" ">

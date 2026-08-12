@@ -2,7 +2,7 @@
 
 import useStudentStore from "@/hooks/useStudentStore";
 import React, { useEffect, useState } from "react";
-import Datepicker from "react-tailwindcss-datepicker";
+import Datepicker, { DateType } from "react-tailwindcss-datepicker";
 
 type DateValue = {
   startDate: Date | null;
@@ -31,7 +31,7 @@ const SingleDatePicker: React.FC = () => {
       <Datepicker
         primaryColor="orange"
         placeholder="Date of Birth"
-        value={{ startDate: value, endDate: value }}
+        value={{ startDate: value as DateType, endDate: value as DateType }}
         onChange={handleValueChange}
         asSingle={true}
         useRange={false}

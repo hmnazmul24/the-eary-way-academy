@@ -51,7 +51,7 @@ export async function createTypingCertificate({
   });
 
   // Save the final PDF
-  const pdfBytes = await pdfDoc.save();
+  const pdfBytes = await pdfDoc.save() as ArrayBufferView<ArrayBuffer>;
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
   // Trigger a download
@@ -114,7 +114,7 @@ export async function createDesignCertificate({
   });
 
   // Save the final PDF
-  const pdfBytes = await pdfDoc.save();
+  const pdfBytes = await pdfDoc.save() as ArrayBufferView<ArrayBuffer>;
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
   // Trigger a download
