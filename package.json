@@ -78,7 +78,7 @@
     "react-lottie": "^1.2.4",
     "react-pdf": "^9.1.0",
     "react-pdf-html": "^2.1.2",
-    "react-tailwindcss-datepicker": "^1.6.6",
+    "react-tailwindcss-datepicker": "^2.0.0",
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.7",

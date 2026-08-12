@@ -11,7 +11,7 @@ type DateValue = {
 
 const SingleDatePicker: React.FC = () => {
   const { setStudentInfo, studentInfo } = useStudentStore();
-  const [value, setValue] = useState<Date | null | string>("Date of Birth");
+  const [value, setValue] = useState<Date>(() => new Date());
 
   const handleValueChange = (newValue: any) => {
     if (newValue.startDate) {
@@ -21,8 +21,9 @@ const SingleDatePicker: React.FC = () => {
     }
   };
   useEffect(() => {
+
     if (studentInfo.dateOfBirth !== "") {
-      setValue(studentInfo.dateOfBirth);
+      setValue(new Date(studentInfo.dateOfBirth));
     }
   }, [studentInfo.dateOfBirth]);
 
@@ -31,7 +32,7 @@ const SingleDatePicker: React.FC = () => {
       <Datepicker
         primaryColor="orange"
         placeholder="Date of Birth"
-        value={{ startDate: value as DateType, endDate: value as DateType }}
+        value={{ startDate: value, endDate: value }}
         onChange={handleValueChange}
         asSingle={true}
         useRange={false}
